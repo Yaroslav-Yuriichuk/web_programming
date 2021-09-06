@@ -1,6 +1,7 @@
-.testimonials > ul {
+.testimonials > div {
     margin: 0;
     justify-content: center;
+    display: flex;
 }
 
 .testimonials ul {
