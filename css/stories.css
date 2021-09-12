@@ -87,7 +87,7 @@
     color: #ffa443;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1150px) {
     .stories > div {
         max-width: 1024px;
         margin: 0px 46px 0px 10px;
