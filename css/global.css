@@ -98,7 +98,7 @@ p {
     color: #7D7987;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1150px) {
     h1 {
         font-size: 33px;
     }
