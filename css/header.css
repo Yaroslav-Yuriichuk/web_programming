@@ -40,7 +40,7 @@ header nav ul {
     display: none;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1150px) {
     .header__nav-link {
         margin-right: 15px;
     }
