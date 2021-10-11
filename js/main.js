@@ -34,8 +34,6 @@ let allItems = [
 let currentlyDisplayedItems = allItems
 
 let currentlyEditedItemId = null
-let currentId = 3
-let idToItem = {}
 let currentMode = "ADD" // ADD or EDIT
 //#endregion
 
@@ -55,7 +53,6 @@ const baseRequest = async ({ urlPath = "", method ="GET", body = null}) => {
         if (body) {
             parameters.body = JSON.stringify(body)
         }
-        // console.log(body)
         return await fetch(`${RESOURCE_URL}${urlPath}`, parameters)
     } catch(error) {
         console.log("vds")
@@ -68,10 +65,6 @@ const fetchAllItems = async () => {
 
     await sortItems()
     await searchItems()
-
-    for (const item of allItems) {
-        idToItem[item.id] = item
-    }
 }
 
 const getAllItems = async () => {
@@ -79,14 +72,20 @@ const getAllItems = async () => {
     return rawResponse.json()
 }
 
-const postItem = async (body) =>
+const postItem = async (body) => {
     await baseRequest({ method: "POST", body: body})
+    await fetchAllItems()
+}    
 
-const updateItem = async (id, body) =>
+const updateItem = async (id, body) => {
     await baseRequest({ urlPath: `/${id}`, method: "PUT", body: body})
+    fetchAllItems()
+}    
 
-const deleteItem = async (id) =>
+const deleteItem = async (id) => {
     await baseRequest({ urlPath: `/${id}`, method: "DELETE" })
+    await fetchAllItems()
+}    
 //#endregion
 
 //#region DOM
@@ -109,12 +108,16 @@ const itemTemplate = ({ id, name, price, weight_kg, item_type, item_count }) => 
 
 const renderItems = (items) => {
     itemsList.innerHTML = ""
+    hasCurrentlyEdited = false
 
     for (const item of items) {
         addItemtoPage(item);
+        if (item.id == currentlyEditedItemId) {
+            hasCurrentlyEdited = true
+        }
     }
 
-    if (currentMode === "EDIT") {
+    if (currentMode === "EDIT" && hasCurrentlyEdited) {
         liToEdit = document.getElementById(currentlyEditedItemId)
         liToEdit.style.borderStyle = "solid"
         liToEdit.style.borderColor = "rgb(146, 95, 0)"
@@ -193,6 +196,26 @@ const compareStrings = (a, b) => {
     return a < b ? -1 : 1
 }
 
+const getItemWithId = (id) => {
+    let low = 0
+    let high = currentlyDisplayedItems.length - 1
+
+    while (high >= low) {
+        let mid = low + (high - low) / 2
+
+        if (currentlyDisplayedItems[mid].id == id) {
+            return currentlyDisplayedItems[mid]
+        }
+        else if (currentlyDisplayedItems[mid].id < id) {
+            low = mid + 1
+        }
+        else {
+            high = mid - 1
+        }
+    }
+    return null
+}
+
 const validateIputs = () => {
     let errors = []
 
@@ -256,23 +279,15 @@ const addEditItem = () => {
     itemCount = inputCount.value
 
     if (currentMode === "ADD") {
-        allItems.push({ id: ++currentId,
-            name: itemName,
-            price: parseInt(itemPrice),
-            weight_kg: parseFloat(itemWeight),
-            item_type: itemType,
-            item_count: parseInt(itemCount)})
         postItem({name: itemName,
             price: parseInt(itemPrice),
             weight_kg: parseFloat(itemWeight),
             item_type: itemType,
-            item_count: parseInt(itemCount)})     
-        idToItem[currentId] = allItems[currentId]
-
+            item_count: parseInt(itemCount)})
     } else {
         itemToEditButton = document.getElementById("item-edit-button-" + currentlyEditedItemId)
-        itemToEdit = idToItem[currentlyEditedItemId]
 
+        let itemToEdit = getItemWithId(currentlyEditedItemId)
         itemToEdit.name = (itemName === "") ? itemToEdit.name : itemName
         itemToEdit.price = (itemPrice === "") ? itemToEdit.price : parseInt(itemPrice)
         itemToEdit.weight_kg = (itemWeight === "") ? itemToEdit.weight_kg : parseFloat(itemWeight)
@@ -288,15 +303,11 @@ const addEditItem = () => {
     }
 
     clearAddEditInputs()
-
-    sortItems()
-    searchItems()
-    calculateTotal()
 }
 
 const removeItem = (removeButton) => {
     let itemToRemoveId = parseInt(removeButton.id.split("-")[3])
-    idToItem[itemToRemoveId] = null
+    
     if (itemToRemoveId == currentlyEditedItemId) {
         currentlyEditedItemId = null
         currentMode = "ADD"
@@ -305,8 +316,6 @@ const removeItem = (removeButton) => {
     }
 
     deleteItem(itemToRemoveId)
-    allItems = allItems.filter(item => item.id != itemToRemoveId)
-    searchItems()
 }
 
 const sortItems = () => {
