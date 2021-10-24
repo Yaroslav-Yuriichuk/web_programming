@@ -14,6 +14,14 @@ a {
     color: black;
 }
 
+.logo {
+    margin: 0;
+    height: 60px;
+    width: 120px;
+}
+
+
+
 
 
 
@@ -22,12 +30,6 @@ header {
     padding-top: 10px;
     display: flex;
     align-items: center;
-}
-
-.logo {
-    margin: 0;
-    height: 60px;
-    width: 120px;
 }
 
 .header__nav {
@@ -54,4 +56,71 @@ header {
 
 .header__nav-link a.active {
     background-color: rgb(231, 231, 231);
+}
+
+
+
+
+
+
+footer {
+    background-color: rgb(247, 247, 247);
+}
+
+.footer__upper-part {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__short-info {
+    margin-left: 20px;
+}
+
+footer h4, p{
+    margin: 0;
+    padding: 0;
+}
+
+footer h4 {
+    font-size: 18px;
+}
+
+footer p {
+    font-size: 13px;
+    width: 300px;
+}
+
+footer .logo {
+    margin-right: 115px;
+}
+
+footer .line {
+    margin: 0 auto;
+    border: rgb(109, 109, 109) 0.5px solid;
+    width: 1000px;
+    margin-top: 15px;
+}
+
+footer .social {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.social img {
+    margin-left: 15px;
+}
+
+.footer__rights {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.footer__rights p {
+    margin-left: 130px;
 }
