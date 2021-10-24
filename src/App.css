@@ -60,6 +60,21 @@ header {
 
 
 
+.heading {
+    display: flex;
+    margin-top: 50px;
+}
+
+.heading__image {
+    margin-left: 50px;
+    margin-right: 120px;
+}
+
+.heading p {
+    width: 400px;
+}
+
+
 
 
 
@@ -103,13 +118,13 @@ footer .line {
     margin-top: 15px;
 }
 
-footer .social {
+footer .socials {
     display: flex;
     align-items: center;
     margin-right: 20px;
 }
 
-.social img {
+.socials img {
     margin-left: 15px;
 }
 

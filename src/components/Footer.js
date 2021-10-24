@@ -19,7 +19,7 @@ const Footer = () => {
                     </p>
                 </div>
                 <img className='logo' src={logo} alt='Logo'/>
-                <div className='social'>
+                <div className='socials'>
                     <img src={instagram_logo} alt='instagram'/>
                     <img src={facebook_logo} alt='instagram'/>
                     <img src={twitter_logo} alt='instagram'/>
