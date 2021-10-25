@@ -1,6 +1,6 @@
 .container {
     margin: 0 auto;
-    max-width: 1200px;
+    width: 1366px;
 }
 
 ul {
@@ -28,11 +28,15 @@ a {
 header {
     position: fixed;
     top: 0;
-    width: 1200px;
+    width: 1366px;
     background-color: white;
     padding-top: 10px;
     display: flex;
     align-items: center;
+}
+
+header .logo {
+    margin-left: 84px;
 }
 
 .header__nav {
@@ -63,9 +67,23 @@ header {
 
 
 
+
+
+
+
+
+
+
+
+
+
+.home {
+    margin-top: 150px;
+    margin-left: 84px;
+}
+
 .heading {
     display: flex;
-    margin-top: 100px;
 }
 
 .heading__image {
@@ -138,8 +156,25 @@ header {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 footer {
     background-color: rgb(247, 247, 247);
+    width: 1200px;
+    margin: 0 auto;
 }
 
 .footer__upper-part {
