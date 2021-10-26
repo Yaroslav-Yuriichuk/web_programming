@@ -1,7 +1,9 @@
 
 const Item = () => {
     return (
-        <h1>Item</h1>
+        <div className='item'>
+            <h1>Item</h1>
+        </div>
     )
 }
 

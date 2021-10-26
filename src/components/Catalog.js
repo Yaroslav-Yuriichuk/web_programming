@@ -1,7 +1,9 @@
 
 const Catalog = () => {
     return (
-        <h1>Catalog</h1>
+        <div className='catalog'>
+            <h1>Catalog</h1>
+        </div>
     )
 }
 
