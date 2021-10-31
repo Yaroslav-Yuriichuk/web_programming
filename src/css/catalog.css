@@ -2,3 +2,57 @@
     margin-top: 150px;
     margin-left: 84px;
 }
+
+
+.filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.filters .search {
+    margin-left: 30px;
+}
+
+.filters select, input {
+    height: 26px;
+    margin-left: 15px;
+}
+
+.sort {
+    margin-right: 100px;
+}
+
+.catalog ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 10px;
+    margin-bottom: 50px;
+}
+
+.catalog-item {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: rgb(255, 255, 255) 2px solid;
+    border-radius: 15px;
+    margin-right: 10px;
+    padding-bottom: 10px;
+}
+
+.catalog-item:hover {
+    border: rgb(180, 180, 180) 2px solid;
+}
+
+.item-image {
+    width: 250px;
+    height: 263.55px;
+}
+
+.item-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
