@@ -1,14 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Select from 'react-select'
 
-const SortParameterSelect = () => {
+const SortParameterSelect = ({ sortItems }) => {
+    const options = [
+        {
+          value: 'single-name',
+          label: 'name'
+        },
+        {
+          value: 'single-price',
+          label: 'single price'
+        },
+        {
+          value: 'total-price',
+          label: 'total price'
+        },
+        {
+          value: 'single-weight',
+          label: 'single weight'
+        },
+        {
+          value: 'total-weight',
+          label: 'total weight'
+        }
+    ]
+    
+    const [selectedValue, setSelectedValue] = useState('single-name');
+    
+    const handleValueChange = e => {
+        setSelectedValue(e.value);
+        sortItems(e.value)
+    }
+
     return (
-        <select>
-            <option value='single-name'>name</option>
-            <option value='single-price'>single price</option>
-            <option value='total-price'>total price</option>
-            <option value='single-weight'>single weight</option>
-            <option value='total-weight'>total weight</option>
-        </select>
+        <Select className='select left'
+            value={options.find(x => x.value === selectedValue)}
+            options={options}
+            onChange={handleValueChange}
+        />
     )
 }
 

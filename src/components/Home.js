@@ -1,6 +1,7 @@
 import Heading from "./Heading"
 import MayLikeItem from "./MayLikeItem"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import ScrollToTop from "./ScrollToTop"
 
 const Home = () => {
     let name = "Item"
@@ -18,6 +19,8 @@ const Home = () => {
             augue interdum velit. Eget aliquet nibh 
             praesent tristique magna sit. Amet 
             justo donec enim diam vulputate ut.`]
+
+    const [isScrollNeeded, setIsScrollNeeded] = useState(true)
 
     const getRandomInfo = () => {
         return infos[Math.round(Math.random() * 100) % 3]
@@ -48,6 +51,7 @@ const Home = () => {
     const [id, setId] = useState(4)
 
     const showMoreItems = () => {
+        setIsScrollNeeded(false)
         setItems([...mayLikeItems,
             {
                 id: id,
@@ -76,6 +80,7 @@ const Home = () => {
     return (
         <div className='home'>
             <Heading />
+            {isScrollNeeded ? <ScrollToTop /> : null}
             <section className='may-like-items'>
                 <h1>You may be interested</h1>
                 <ul>

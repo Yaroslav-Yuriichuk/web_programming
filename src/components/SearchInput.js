@@ -1,9 +1,9 @@
 import React from 'react'
 
-const SearchInput = () => {
+const SearchInput = ({ searchItems }) => {
+    
     return (
-        <input type='search'>
-            
+        <input type='search' onChange={e => searchItems(e.target.value)}>               
         </input>
     )
 }

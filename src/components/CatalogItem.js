@@ -1,7 +1,8 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import item_image from "./assets/box-of-items.jpg"
 
-const CatalogItem = ({name, price, weight, type, count }) => {
+const CatalogItem = ({id, name, price, weight, type, count }) => {
     return (
         <div className='catalog-item'>
             <img className="item-image" src={item_image} alt="Item"/>
@@ -14,6 +15,7 @@ const CatalogItem = ({name, price, weight, type, count }) => {
                 <label className="item-type">Type: {type}</label>
                 <label className="item-count">Ammount: {count}</label>
             </div>
+            <NavLink to={`/item/${id}`}>View more</NavLink>
         </div>
     )
 }
