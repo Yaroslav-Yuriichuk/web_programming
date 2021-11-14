@@ -1,96 +1,70 @@
 import { useState, useEffect } from "react"
+import axios from "axios"
 import Filters from "./Filters"
 import CatalogItem from "./CatalogItem"
 import ScrollToTop from "./ScrollToTop"
+import Loading from "./Loading"
+import Footer from "./Footer"
 
 const Catalog = ({ allItems, currentlyDisplayedItems, setAllItems, setCurrentlyDisplayedItems }) => {
 
     const [currentSortOrder, setCurrentSortOrder] = useState(() => 'asc')
+    const [currentSortParameter, setCurrentSortParameter] = useState(() => 'single-name')
+    const [currentSearch, setCurrentSearch] = useState(() => '')
+
+    const [isLoading, setIsLoading] = useState(() => true)
+
+    const getItems = (search, sortParameter, sortOrder) => {
+        axios.get("http://127.0.0.1:5000/item_ordered?" + search + sortParameter + sortOrder)
+            .then(res => {
+                const allItems = res.data
+                setAllItems(allItems)
+                setCurrentlyDisplayedItems(allItems)
+            })
+        setIsLoading(false)
+    }
 
     useEffect(() => {
-        sortItems('single-name')
+        getItems("search=", "&parameter=single-name", "&order=asc")
     }, [])
 
-    const compareStrings = (a, b) => {
-        if (a === b) return 0
-        return a < b ? -1 : 1
+    const reverseItems = () => {
+        setCurrentSortOrder(currentSortOrder === "asc" ? "desc" : "asc")
+        getItems("search=" + currentSearch,
+            "&parameter=" + currentSortParameter,
+            "&order=" + (currentSortOrder === "asc" ? "desc" : "asc"))
     }
 
     const sortItems = (parameter) => {
-        let sortOrder = (currentSortOrder === 'asc') ? 1 : -1;
-        let [selectedCoef, selectedParameter] = parameter.split("-")
-
-        let sortCoef = selectedCoef === "total" ?
-            item => item.count :
-            item => 1
-
-        let sortParameters = {
-            "name": item => item.name,
-            "price": item => item.price,
-            "weight": item => item.weight
-        }
-
-        let tmpAllItems = [...allItems]
-        let tmpCurrentlyDisplayedItems = [...currentlyDisplayedItems]
-
-        tmpAllItems.sort((a, b) => {
-            console.log("f")
-            if (typeof sortParameters[selectedParameter](a) === "string")
-                return sortOrder * compareStrings(sortParameters[selectedParameter](a),
-                    sortParameters[selectedParameter](b))
-            else
-                return sortOrder * (sortParameters[selectedParameter](a) * sortCoef(a)
-                    - sortParameters[selectedParameter](b) * sortCoef(b))
-        })
-
-        tmpCurrentlyDisplayedItems.sort((a, b) => {
-            if (typeof sortParameters[selectedParameter](a) === "string")
-                return sortOrder * compareStrings(sortParameters[selectedParameter](a),
-                    sortParameters[selectedParameter](b))
-            else
-                return sortOrder * (sortParameters[selectedParameter](a) * sortCoef(a)
-                    - sortParameters[selectedParameter](b) * sortCoef(b))
-        })
-
-        setAllItems(tmpAllItems)
-        setCurrentlyDisplayedItems(tmpCurrentlyDisplayedItems)
-    }
-
-    const reverseItems = () => {
-        if (currentSortOrder === 'asc') {
-            setCurrentSortOrder('desc')
-        }
-        else {
-            setCurrentSortOrder('asc')
-        }
-
-        let tmpAllItems = [...allItems]
-        let tmpCurrentlyDisplayedItems = [...currentlyDisplayedItems]
-
-        tmpAllItems.reverse()
-        tmpCurrentlyDisplayedItems.reverse()
-
-        setAllItems(tmpAllItems)
-        setCurrentlyDisplayedItems(tmpCurrentlyDisplayedItems)
+        setCurrentSortParameter(parameter)
+        getItems("search=" + currentSearch,
+            "&parameter=" + parameter,
+            "&order=" + currentSortOrder)
     }
 
     const searchItems = (searchInput) => {
-        setCurrentlyDisplayedItems(allItems.filter(item => {
-            return item.name.toUpperCase().replaceAll(' ', '')
-                .includes(searchInput.toUpperCase().replaceAll(' ', ''))
-        }))
+        setCurrentSearch(searchInput)
+        getItems("search=" + searchInput,
+            "&parameter=" + currentSortParameter,
+            "&order=" + currentSortOrder)
     }
 
     return (
-        <div className='catalog'>
-            <ScrollToTop />
-            <Filters reverseItems={reverseItems} sortItems={sortItems} searchItems={searchItems}/>   
-            <ul>
-                { currentlyDisplayedItems.map(item =>
-                    <CatalogItem key={item.id} id={item.id} name={item.name} price={item.price} weight={item.weight}
-                    type={item.type} count={item.count} />)
+        <div>
+            <div className='catalog'>
+                <ScrollToTop />
+                <Filters reverseItems={reverseItems} sortItems={sortItems} searchItems={searchItems}/>
+                {
+                    isLoading ? <Loading />
+                    : <ul>
+                        { currentlyDisplayedItems.slice(0, 100).map(item =>
+                            <CatalogItem key={item.id} id={item.id} name={item.name} price={item.price} 
+                            weight_kg={item.weight_kg}
+                            item_type={item.item_type} item_count={item.item_count} />)
+                        }
+                    </ul>
                 }
-            </ul>
+            </div>
         </div>    
     )
 }

@@ -12,11 +12,11 @@ const Item = ({ allItems, id }) => {
             <div className="item-info">
                 <h1 className="item-name">{item.name}</h1>
                 <label className="item-price">Price: {item.price} hrn.</label>
-                <label className="item-price">Total price: {item.count * item.price} hrn.</label>
-                <label className="item-weight">Weight: {Math.round(item.weight * 100) / 100} kg</label>
-                <label className="item-weight">Total weight: {Math.round(item.count * item.weight * 100) / 100} kg</label>
-                <label className="item-type">Type: {item.type}</label>
-                <label className="item-count">Ammount: {item.count}</label>
+                <label className="item-price">Total price: {item.item_count * item.price} hrn.</label>
+                <label className="item-weight">Weight: {Math.round(item.weight_kg * 100) / 100} kg</label>
+                <label className="item-weight">Total weight: {Math.round(item.count * item.weight_kg * 100) / 100} kg</label>
+                <label className="item-type">Type: {item.item_type}</label>
+                <label className="item-count">Ammount: {item.item_count}</label>
                 <p>
                     Quam lacus suspendisse faucibus 
                     interdum posuere lorem ipsum dolor. 

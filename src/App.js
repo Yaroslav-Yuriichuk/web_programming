@@ -5,18 +5,33 @@ import Home from "./components/Home"
 import Catalog from "./components/Catalog"
 import ItemPage from "./components/ItemPage"
 import Footer from "./components/Footer"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 const App = () => {
 
-    const [allItems, setAllItems] = useState(() => { return [
-        {id: 1, name: "Acer Nitro 5", price: 23999, weight: 2.4, type: "REGULAR", count: 1},
-        {id: 2, name: "Apple Iphone 11", price: 18999, weight: 0.2, type: "REGULAR", count: 2},
-        {id: 3, name: "Asus AsusPro", price: 25999, weight: 2.3, type: "REGULAR", count: 1},
-        {id: 4, name: "SVS SB-1000 Pro", price: 20440, weight: 10.1, type: "REGULAR", count: 3}
-    ]})
+    /*const [allItems, setAllItems] = useState(() => { return [
+        {id: 1, name: "Acer Nitro 5", price: 23999, weight_kg: 2.4, item_type: "REGULAR", item_count: 1},
+        {id: 2, name: "Apple Iphone 11", price: 18999, weight_kg: 0.2, item_type: "REGULAR", item_count: 2},
+        {id: 3, name: "Asus AsusPro", price: 25999, weight_kg: 2.3, item_type: "REGULAR", item_count: 1},
+        {id: 4, name: "SVS SB-1000 Pro", price: 20440, weight_kg: 10.1, item_type: "REGULAR", item_count: 3}
+    ]})*/
+    const [allItems, setAllItems] = useState(() => [])
 
     const [currentlyDisplayedItems, setCurrentlyDisplayedItems] = useState(() => allItems)
+
+    const getItems = (search, sortParameter, sortOrder) => {
+        axios.get("http://127.0.0.1:5000/item_ordered?" + search + sortParameter + sortOrder)
+            .then(res => {
+                const allItems = res.data
+                setAllItems(allItems)
+                setCurrentlyDisplayedItems(allItems)
+            })
+    }
+
+    useEffect(() => {
+        getItems("search=", "&parameter=single-name", "&order=asc")
+    }, [])
 
     return (
         <HashRouter>
@@ -30,8 +45,8 @@ const App = () => {
                         />}></Route>
                     <Route path='/item/:id' render={props => <ItemPage {...props} allItems={allItems}/>}></Route>
                 </div>
-                <Footer />
             </div>
+            <Footer />
         </HashRouter>
     )
 }
