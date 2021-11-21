@@ -16,7 +16,7 @@ header .logo {
 .header__nav {
     display: flex;
     align-items: center;
-    margin-left: 360px;
+    margin-left: 295px;
 }
 
 .header__nav-link a {

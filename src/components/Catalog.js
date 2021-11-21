@@ -4,7 +4,6 @@ import Filters from "./Filters"
 import CatalogItem from "./CatalogItem"
 import ScrollToTop from "./ScrollToTop"
 import Loading from "./Loading"
-import Footer from "./Footer"
 
 const Catalog = ({ allItems, currentlyDisplayedItems, setAllItems, setCurrentlyDisplayedItems }) => {
 

@@ -7,6 +7,7 @@ import ItemPage from "./components/ItemPage"
 import Footer from "./components/Footer"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import Cart from "./components/Cart"
 
 const App = () => {
 
@@ -44,6 +45,7 @@ const App = () => {
                         setAllItems={setAllItems} setCurrentlyDisplayedItems={setCurrentlyDisplayedItems}
                         />}></Route>
                     <Route path='/item/:id' render={props => <ItemPage {...props} allItems={allItems}/>}></Route>
+                    <Route path='/cart' render={props => <Cart allItems={allItems}/>}></Route>
                 </div>
             </div>
             <Footer />

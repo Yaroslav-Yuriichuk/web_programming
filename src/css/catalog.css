@@ -1,6 +1,6 @@
 .catalog {
     margin-top: 130px;
-    margin-left: 84px;
+    margin-left: 83px;
 }
 
 
@@ -67,6 +67,38 @@
     border: rgb(180, 180, 180) 2px solid;
 }
 
+.buttons {
+    width: 280px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.catalog-item button {
+    margin-right: 15px;
+    margin-top: 15px;
+    height: 30px;
+    border: 0 solid;
+    border-radius: 13px;
+    background: rgb(163, 221, 163);
+    cursor: pointer;
+}
+
+button.add {
+    background: rgb(163, 221, 163);
+}
+
+button.add:hover {
+    background: rgb(153, 228, 153);
+}
+
+button.remove {
+    background: rgb(214, 138, 138);
+}
+
+button.remove:hover {
+    background: rgb(223, 125, 125);
+}
+
 .catalog-item a {
     margin-top: 15px;
     margin-bottom: 10px;
@@ -87,6 +119,7 @@
 }
 
 .item-image {
+    margin-top: 8px;
     width: 250px;
     height: 263.55px;
 }
