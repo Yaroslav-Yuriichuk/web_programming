@@ -10,15 +10,21 @@ const Cart = ({ allItemsMap }) => {
         + allItemsMap[current.id].price * allItemsMap[current.id].item_count * current.quantity
     const [total, setTotal] = useState(() => 0)
     const [toUpdate, setToUpdate] = useState(() => false)
+    const [isScrollNeeded, setIsScrollNeeded] = useState(() => false)
 
     useEffect(() => {
         setTotal(cart.reduce(reducer, 0))
         setToUpdate(false)
     }, [toUpdate])
 
+    const cancelScrollToTop = () => {
+        if (isScrollNeeded) setIsScrollNeeded(false)
+        return <></>
+    }
+
     return (
         <div className='cart'>
-            <ScrollToTop />
+            {isScrollNeeded ? <ScrollToTop /> : cancelScrollToTop()}
             <h1>Your cart</h1>
             { cart.length > 0
                 ? <></>
