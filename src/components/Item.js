@@ -2,9 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import item_image from "./assets/box-of-items.jpg"
 
-const Item = ({ allItems, id }) => {
+const Item = ({ allItemsMap, id }) => {
 
-    const [item] = useState(() => allItems.find(item => item.id == id))
+    const [item] = useState(() => allItemsMap[id])
 
     return (
         <div className='item'>

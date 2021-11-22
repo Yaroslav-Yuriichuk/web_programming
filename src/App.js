@@ -18,6 +18,7 @@ const App = () => {
         {id: 4, name: "SVS SB-1000 Pro", price: 20440, weight_kg: 10.1, item_type: "REGULAR", item_count: 3}
     ]})*/
     const [allItems, setAllItems] = useState(() => [])
+    const [allItemsMap, setAllItemsMap] = useState(() => {return {}})
 
     const [currentlyDisplayedItems, setCurrentlyDisplayedItems] = useState(() => allItems)
 
@@ -26,6 +27,13 @@ const App = () => {
             .then(res => {
                 const allItems = res.data
                 setAllItems(allItems)
+                for (const item of allItems) {
+                    setAllItemsMap(prev => {
+                        let tmp = prev
+                        tmp[item.id] = item
+                        return tmp
+                    })
+                }
                 setCurrentlyDisplayedItems(allItems)
             })
     }
@@ -44,8 +52,8 @@ const App = () => {
                         allItems={allItems} currentlyDisplayedItems={currentlyDisplayedItems}
                         setAllItems={setAllItems} setCurrentlyDisplayedItems={setCurrentlyDisplayedItems}
                         />}></Route>
-                    <Route path='/item/:id' render={props => <ItemPage {...props} allItems={allItems}/>}></Route>
-                    <Route path='/cart' render={props => <Cart allItems={allItems}/>}></Route>
+                    <Route path='/item/:id' render={props => <ItemPage {...props} allItemsMap={allItemsMap}/>}></Route>
+                    <Route path='/cart' render={props => <Cart {...props} allItemsMap={allItemsMap}/>}></Route>
                 </div>
             </div>
             <Footer />

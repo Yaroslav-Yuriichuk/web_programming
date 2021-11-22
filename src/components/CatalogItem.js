@@ -34,7 +34,7 @@ const CatalogItem = ({id, name, price, weight_kg, item_type, item_count }) => {
                 <label className="item-weight">Weight: {Math.round(weight_kg * 100) / 100} kg</label>
                 <label className="item-weight">Total weight: {Math.round(item_count * weight_kg * 100) / 100} kg</label>
                 <label className="item-type">Type: {item_type}</label>
-                <label className="item-count">Ammount: {item_count}</label>
+                <label className="item-count">Quantity: {item_count}</label>
             </div>
             <NavLink to={`/item/${id}`}>View more</NavLink>
         </div>

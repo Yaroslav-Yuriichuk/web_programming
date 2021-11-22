@@ -4,7 +4,8 @@ import { useEffect, useState } from "react"
 import ScrollToTop from "./ScrollToTop"
 
 const Home = () => {
-    let name = "Item"
+
+    const name = "Item"
     let infos = [`Gravida rutrum quisque non tellus orci 
             ac. A condimentum vitae sapien 
             pellentesque habitant morbi. Porttitor 
