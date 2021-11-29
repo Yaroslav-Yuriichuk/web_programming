@@ -29,7 +29,7 @@ const Footer = () => {
             </div>
             <div className='line'></div>
             <div className='footer__rights'>
-                <p>2020 Iot © All rights reserved</p>
+                <p>2021 Iot © All rights reserved</p>
             </div>
         </footer>
     )

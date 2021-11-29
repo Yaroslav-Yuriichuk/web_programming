@@ -8,6 +8,7 @@ import Footer from "./components/Footer"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import Cart from "./components/Cart"
+import CheckoutPage from "./components/CheckoutPage"
 
 const App = () => {
 
@@ -54,6 +55,7 @@ const App = () => {
                         />}></Route>
                     <Route path='/item/:id' render={props => <ItemPage {...props} allItemsMap={allItemsMap}/>}></Route>
                     <Route path='/cart' render={props => <Cart {...props} allItemsMap={allItemsMap}/>}></Route>
+                    <Route path='/checkout' render={props => <CheckoutPage {...props} allItemsMap={allItemsMap}/>}></Route>
                 </div>
             </div>
             <Footer />

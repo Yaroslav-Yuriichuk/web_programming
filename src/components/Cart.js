@@ -34,7 +34,10 @@ const Cart = ({ allItemsMap }) => {
                 price={allItemsMap[item.id].price} item_count={allItemsMap[item.id].item_count}
                 setToUpdate={setToUpdate}/>)}
             <h4>Total: {total} hrn.</h4>
-            <NavLink to='/catalog'>Back to catalog</NavLink>
+            <div className='cart-links'>
+                <NavLink to='/catalog'>Back to catalog</NavLink>
+                {cart.length > 0 ? <NavLink to='/checkout'>Continue</NavLink> : <></>}
+            </div>    
         </div>
     )
 }

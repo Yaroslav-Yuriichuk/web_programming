@@ -1,3 +1,9 @@
+export const removeAllFromCart = () => {
+    return {
+        type: 'REMOVE_ALL_FROM_CART'
+    }
+} 
+
 export const addToCart = (id) => {
     return {
         type: 'ADD_TO_CART',

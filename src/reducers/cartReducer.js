@@ -1,6 +1,8 @@
 const cartReducer = (state = [], action) => {
     let item
     switch (action.type) {
+        case 'REMOVE_ALL_FROM_CART':
+            return []
         case 'ADD_TO_CART':
             return [{ id: action.id, quantity: 1}, ...state]
         case 'REMOVE_FROM_CART':

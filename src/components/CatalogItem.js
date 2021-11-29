@@ -8,7 +8,7 @@ const CatalogItem = ({id, name, price, weight_kg, item_type, item_count }) => {
 
     const cart = useSelector(state => state.cart)
     const [isInCart, setIsInCart] = useState(() => {
-        return cart.find(itemInCart => itemInCart.id == id) != null ? true : false
+        return cart.find(itemInCart => itemInCart.id == id) != null
     })
     const dispatcher = useDispatch()
 
