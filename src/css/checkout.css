@@ -1,0 +1,102 @@
+.checkout-page {
+    margin-top: 80px;
+    margin-left: 83px;
+    margin-bottom: 50px;
+    display: flex;
+}
+
+.checkout-page form {
+    margin-top: 60px;
+    margin-left: 120px;
+    margin-right: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+form button {
+    margin-top: 15px;
+    border: 0px;
+    width: 330px;
+    font-size: 18px;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(231, 231, 231);
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: rgb(199, 199, 199);
+}
+
+.checkout-page h4, h2 {
+    margin-left: 10px;
+}
+
+.checkout-page input {
+    width: 320px;
+    margin: 0;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.input-field  label {
+    margin-bottom: 2px;
+}
+
+.input-text {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    height: 85px;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+.checkout-items {
+    border: 1px rgb(187, 187, 187) solid;
+    border-radius: 10px;
+    padding: 10px 10px 0 10px;
+    max-height: 380px;
+    overflow-y: scroll;
+}
+
+.checkout-item {
+    border: 2px rgb(187, 187, 187) solid;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    width: 400px;
+}
+
+.checkout-item__image {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    width: 125px;
+    height: 131.775px;
+}
+
+.checkout-item__info {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-item__info label {
+    margin-bottom: 2.5px;
+}
+
+.form-error {
+    color: red;
+}
