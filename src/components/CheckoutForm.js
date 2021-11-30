@@ -31,7 +31,7 @@ const CheckoutForm = () => {
         }),
         onSubmit: (values) => {
             dispatcher(removeAllFromCart())
-            history.push("/catalog")
+            history.push("/success")
         }
     })
 

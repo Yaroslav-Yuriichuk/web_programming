@@ -26,4 +26,5 @@ a {
 @import "./css/item-page.css";
 @import "./css/footer.css";
 @import "./css/cart.css";
-@import "./css/checkout.css"
+@import "./css/checkout.css";
+@import "./css/success.css";

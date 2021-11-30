@@ -9,6 +9,8 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import Cart from "./components/Cart"
 import CheckoutPage from "./components/CheckoutPage"
+import SuccessPage from "./components/SuccessPage"
+import { useSelector } from 'react-redux'
 
 const App = () => {
 
@@ -18,6 +20,7 @@ const App = () => {
         {id: 3, name: "Asus AsusPro", price: 25999, weight_kg: 2.3, item_type: "REGULAR", item_count: 1},
         {id: 4, name: "SVS SB-1000 Pro", price: 20440, weight_kg: 10.1, item_type: "REGULAR", item_count: 3}
     ]})*/
+    const cart = useSelector(state => state.cart)
     const [allItems, setAllItems] = useState(() => [])
     const [allItemsMap, setAllItemsMap] = useState(() => {return {}})
 
@@ -55,7 +58,9 @@ const App = () => {
                         />}></Route>
                     <Route path='/item/:id' render={props => <ItemPage {...props} allItemsMap={allItemsMap}/>}></Route>
                     <Route path='/cart' render={props => <Cart {...props} allItemsMap={allItemsMap}/>}></Route>
-                    <Route path='/checkout' render={props => <CheckoutPage {...props} allItemsMap={allItemsMap}/>}></Route>
+                    {cart.length > 0 ? <Route path='/checkout' render={props =>
+                        <CheckoutPage {...props} allItemsMap={allItemsMap}/>}></Route> : <></>}
+                    <Route path='/success' component={SuccessPage}></Route>
                 </div>
             </div>
             <Footer />
